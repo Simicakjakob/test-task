@@ -1,0 +1,24 @@
+
+<mat-toolbar>
+  <span>Test-aplikacija</span>
+</mat-toolbar>
+<table mat-table *ngIf="osebeList"  class="mat-elevation-z8 demo-table">
+  <ng-container *ngFor="let oseba of osebeList" matColumnDef="ime">
+    <th mat-header-cell>ime</th>
+    <td mat-cell >{{oseba.ime}}</td>
+  </ng-container>
+  <ng-container *ngFor="let oseba of osebeList" matColumnDef="priimek">
+    <th mat-header-cell>priimek</th>
+    <td mat-cell >{{oseba.priimek}}</td>
+  </ng-container>
+  <ng-container *ngFor="let oseba of osebeList" matColumnDef="datum_rojstva">
+    <th mat-header-cell>datum rojstva</th>
+    <td mat-cell >{{oseba.datum_rojstva}}</td>
+  </ng-container>
+  <ng-container *ngFor="let oseba of osebeList" matColumnDef="aktiven">
+    <th mat-header-cell>aktiven</th>
+    <td mat-cell >{{oseba.aktiven}}</td>
+  </ng-container>
+</table>
+<router-outlet></router-outlet>
+

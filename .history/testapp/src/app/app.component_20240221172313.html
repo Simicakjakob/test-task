@@ -1,0 +1,39 @@
+
+<mat-toolbar>
+  <span>Test-aplikacija</span>
+</mat-toolbar>
+<table mat-table *ngIf="all_users"  class="mat-elevation-z8 demo-table">
+  <ng-container matColumnDef="ime">
+    <th mat-header-cell *matHeaderCellDef>ime</th>
+    <td mat-cell *matCellDef="let oseba" >{{oseba.ime}}</td>
+  </ng-container>
+  <ng-container matColumnDef="priimek">
+    <th mat-header-cell *matHeaderCellDef>priimek</th>
+    <td mat-cell *matCellDef="let oseba">{{oseba.priimek}}</td>
+  </ng-container>
+  <ng-container matColumnDef="datum rojstva">
+    <th mat-header-cell *matHeaderCellDef>datum rojstva</th>
+    <td mat-cell *matCellDef="let oseba">{{oseba.datum_rojstva}}</td>
+  </ng-container>
+  <ng-container  matColumnDef="aktiven">
+    <th mat-header-cell *matHeaderCellDef>aktiven</th>
+    <td mat-cell *matCellDef="let oseba">{{oseba.aktiven}}</td>
+  </ng-container>
+</table>
+
+<div>
+  <h3>
+    Click Log
+  </h3>
+</div>
+
+@if (!clickedRows.size) {
+  <div>Clicked rows will be logged here</div>
+}
+
+<ul>
+  @for (clickedRow of clickedRows; track clickedRow) {
+    <li>Clicked on {{clickedRow.ime}}</li>
+  }
+<router-outlet></router-outlet>
+

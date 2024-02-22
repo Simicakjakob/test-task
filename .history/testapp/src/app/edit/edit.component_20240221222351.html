@@ -1,0 +1,23 @@
+<form>
+   <mat-form-field>
+      <mat-label >Vpiši ime</mat-label>
+      <input [formControl]="ime" matInput class="ime"  value="{{userToEdit?.ime}}">
+   </mat-form-field>
+   <mat-form-field>
+      <mat-label >Vpiši priimek</mat-label>
+      <input [formControl]="priimek"  matInput class="priimek"  value="{{userToEdit?.priimek}}">
+   </mat-form-field>
+   <mat-form-field>
+      <mat-label>Datum rojstva</mat-label>
+      <input [formControl]="datum_rojstva" matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+   </mat-form-field>
+   <mat-checkbox [formControl]="aktiven"  value="{{userToEdit?.aktiven}}" >Aktiven</mat-checkbox> 
+   <mat-form-field>
+      <mat-label>Opis</mat-label>
+      <textarea [formControl]="opis" matInput value="{{userToEdit?.opis}}"></textarea>
+   </mat-form-field>
+      <button mat-raised-button type="submit" (click)="onSubmit()" color="primary">Submit</button>
+</form>

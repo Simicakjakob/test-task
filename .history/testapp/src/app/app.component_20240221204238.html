@@ -1,0 +1,57 @@
+
+<mat-toolbar>
+  <span>Test-aplikacija</span>
+</mat-toolbar>
+<table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8">
+  @for (column of columnsToDisplay; track column) {
+    <ng-container matColumnDef="{{column}}">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+  }
+  <ng-container matColumnDef="expand">
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+        @if (expandedElement === element) {
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        } @else {
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        }
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container class="expanded" matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let uporabnik" [attr.colspan]="columnsToDisplayWithExpand.length">
+      <div class="example-element-detail"
+           [@detailExpand]="uporabnik == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="example-element-ime"> Ime: {{uporabnik.ime}}</div> 
+          <div class="example-element-priimek">Priimek: {{uporabnik.priimek}} </div> <br>
+          <div class="example-element-datum_rojstva">Datum rojstva: {{uporabnik.datum_rojstva}} </div> <br>
+          <div class="example-element-aktiven">Aktiven:  {{uporabnik.aktiven}} </div> <br>
+          <div class="example-element-description">
+          Opis osebe: {{uporabnik.opis}}
+        </div>
+        <div class="editbuttom"><button class="gumb-edit" mat-raised-button color="primary" (click)="Toggle=!Toggle">Uredi</button>
+        </div>
+      </div>
+    </td>
+    <tr mat-row *ngIf="Toggle">Toggle on</tr>
+  </ng-container>
+  
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+  <tr mat-row *matRowDef="let uporabnik; columns: columnsToDisplayWithExpand;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === uporabnik"
+      (click)="expandedElement = expandedElement === uporabnik ? null : uporabnik">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+<router-outlet></router-outlet>
+

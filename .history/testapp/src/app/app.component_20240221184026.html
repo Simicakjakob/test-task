@@ -1,0 +1,57 @@
+
+<mat-toolbar>
+  <span>Test-aplikacija</span>
+</mat-toolbar>
+<table mat-table [dataSource]="all_users" class="mat-elevation-z8 demo-table">
+  <!-- nime Column -->
+  <ng-container matColumnDef="ime">
+    <th mat-header-cell *matHeaderCellDef>Ime</th>
+    <td mat-cell *matCellDef="let element">{{element.ime}}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="priimek">
+    <th mat-header-cell *matHeaderCellDef>Priimek</th>
+    <td mat-cell *matCellDef="let element">{{element.priimek}}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="datum_rojstva">
+    <th mat-header-cell *matHeaderCellDef>datum_rojstva</th>
+    <td mat-cell *matCellDef="let element">{{element.datum_rojstva}}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="aktiven">
+    <th mat-header-cell *matHeaderCellDef>aktiven</th>
+    <td mat-cell *matCellDef="let element">{{element.aktiven}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      (click)="trenutnaVrsta=row"
+      [class.demo-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns;"
+  ></tr>
+</table>
+
+
+<div>
+  <h3>
+    Click Log
+  </h3>
+</div>
+
+@if (!clickedRows.size) {
+  <div>Clicked rows will be logged here</div>
+}
+
+<ul>
+  @for (clickedRow of clickedRows; track clickedRow) {
+    <li>Clicked on {{clickedRow.ime}}</li>
+
+  }
+<router-outlet></router-outlet>
+
